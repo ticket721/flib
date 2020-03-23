@@ -108,4 +108,4 @@
 
   ${props=>props.isActive&&`\n    opacity: 1;\n\n    &::after {\n      background-color: ${props.theme.primaryColor};\n      border-radius: 100%;\n      bottom: -1rem;\n      content: "";\n      display: block;\n      height: 4px;\n      left: 0;\n      margin auto;\n      position: absolute;\n      right: 0;\n      width: 4px;\n    }\n  `}
 `,Link=props=>{const content=react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment,null,react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(LinkInner,{icon:props.wIcon},props.children,props.label),props.wIcon&&react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_icon__WEBPACK_IMPORTED_MODULE_2__.a,{icon:props.iconName?props.iconName:""}));return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(StyledLink,{isActive:props.isActive,href:props.to},content)};__webpack_exports__.b=Link}},[[461,1,2]]]);
-//# sourceMappingURL=main.bab38071842c9bb5c47c.bundle.js.map
+//# sourceMappingURL=main.38daf1db25312144013a.bundle.js.map
