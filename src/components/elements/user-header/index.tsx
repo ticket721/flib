@@ -58,7 +58,7 @@ export const WalletHeader: React.FunctionComponent<WalletHeaderProps & {classNam
           <ImgContainer profileHeader={props.profileHeader}>
             <img src={props.user.profilePicture} alt={fullName}/>
           </ImgContainer>
-          <div className={props.className}>
+          <div>
             {props.profileHeader ? (
               <h1>{ fullName }</h1>
             ) : (
