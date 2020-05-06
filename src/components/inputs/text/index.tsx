@@ -1,16 +1,18 @@
 import * as React from 'react';
-import styled from '../../../config/styled';
-import Cleave from 'cleave.js/react';
+
+import Cleave          from 'cleave.js/react';
+import styled          from '../../../config/styled';
+import { ChangeEvent } from 'react';
 
 export interface InputProps extends React.ComponentProps<any> {
   error?:boolean;
   errorMessage?:string;
   label:string;
   name:string;
-  onChange: () => void;
+  onChange: (eventOrPath: string | ChangeEvent<any>) => void | ((eventOrTextValue: string | ChangeEvent<any>) => void);
   placeholder: string;
   options?: any;
-  value?:string;
+  value:string;
 }
 
 const Error = styled.span`
@@ -19,7 +21,7 @@ const Error = styled.span`
   font-size: 13px;
   font-weight: 500;
   left: 0;
-  position: absolute;
+  position: relative;
 `;
 
 const StyledLabel = styled.label`
@@ -80,16 +82,17 @@ const StyledInputContainer = styled.div<InputProps>`
 `;
 
 export const TextInput: React.FunctionComponent<InputProps & {className?: string}> = (props: InputProps): JSX.Element => {
+
   return <StyledInputContainer error={props.error} className={props.className}>
       <StyledLabel htmlFor={props.name}>{props.label}</StyledLabel>
 
       {props.options ? (
         <Cleave options={props.options} id={props.name} name={props.name} placeholder={props.placeholder} defaultValue={props.value} onChange={props.onChange} />
       ) : (
-        <input id={props.name} name={props.name} placeholder={props.placeholder} defaultValue={props.value} onChange={props.onChange} />
+        <input id={props.name} name={props.name} placeholder={props.placeholder} />
       )}
 
-      {props.error && <Error>{ props.errorMessage }</Error> }
+      {props.error && <Error>{props.errorMessage}</Error> }
   </StyledInputContainer>
 }
 

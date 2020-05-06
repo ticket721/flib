@@ -113,7 +113,7 @@ export const Textarea: React.FunctionComponent<TextareaProps> = (props: Textarea
         maxLength={props.maxChar}>
       </textarea>
 
-      {props.error && <Error>{ props.errorMessage }</Error> }
+    {props.error && <Error>{ props.errorMessage}</Error> }
   </StyledTextarea>
 }
 
