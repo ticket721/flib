@@ -1,18 +1,21 @@
-import * as React from 'react';
-import styled from '../../../config/styled';
+import * as React      from 'react';
+import { ChangeEvent } from 'react';
+import styled          from '../../../config/styled';
 
 export interface TextareaProps extends React.ComponentProps<any> {
-  error?:boolean;
-  errorMessage?:string;
+  error?:boolean | undefined;
+  errormessage?:string;
   label:string;
   maxChar?: number;
   name:string;
+  onChange: (eventOrPath: string | ChangeEvent<any>) => void | ((eventOrTextValue: string | ChangeEvent<any>) => void);
   placeholder: string;
   value?:string;
+  className?: string;
 }
 
 const Error = styled.span`
-  bottom: -24px;
+  bottom: -16px;
   color: ${props => props.theme.warningColor};
   font-size: 13px;
   font-weight: 500;
@@ -96,7 +99,7 @@ export const Textarea: React.FunctionComponent<TextareaProps> = (props: Textarea
     setCount(target.value.length);
   };
 
-  return <StyledTextarea error={props.error}>
+  return <StyledTextarea error={props.error} className={props.className}>
       <LabelsContainer>
         <StyledLabel htmlFor={props.name}>{props.label}</StyledLabel>
         {props.maxChar &&
@@ -110,10 +113,12 @@ export const Textarea: React.FunctionComponent<TextareaProps> = (props: Textarea
         placeholder={props.placeholder}
         defaultValue={props.value}
         onKeyUp={keypress}
-        maxLength={props.maxChar}>
+        maxLength={props.maxChar}
+        onChange={props.onChange}
+      >
       </textarea>
 
-    {props.error && <Error>{ props.errorMessage}</Error> }
+    {props.error && <Error>{ props.errormessage}</Error> }
   </StyledTextarea>
 }
 

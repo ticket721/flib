@@ -5,18 +5,20 @@ import styled          from '../../../config/styled';
 import { ChangeEvent } from 'react';
 
 export interface InputProps extends React.ComponentProps<any> {
-  error?:boolean;
-  errorMessage?:string;
+  error?:boolean | undefined;
+  errormessage?:string;
   label:string;
   name:string;
   onChange: (eventOrPath: string | ChangeEvent<any>) => void | ((eventOrTextValue: string | ChangeEvent<any>) => void);
   placeholder: string;
   options?: any;
   value:string;
+  className?: string;
+  accept?: string;
 }
 
 const Error = styled.span`
-  bottom: -24px;
+  bottom: -16px;
   color: ${props => props.theme.warningColor};
   font-size: 13px;
   font-weight: 500;
@@ -89,11 +91,24 @@ export const TextInput: React.FunctionComponent<InputProps & {className?: string
       {props.options ? (
         <Cleave options={props.options} id={props.name} name={props.name} placeholder={props.placeholder} defaultValue={props.value} onChange={props.onChange} />
       ) : (
-        <input id={props.name} name={props.name} placeholder={props.placeholder} />
+        <input
+          id={props.name}
+          name={props.name}
+          placeholder={props.placeholder}
+          onChange={props.onChange}
+          value={props.value}
+          type={props.type || 'text'}
+          accept={props.accept}
+        />
       )}
 
-      {props.error && <Error>{props.errorMessage}</Error> }
+      {props.error && <Error>{props.errormessage}</Error> }
   </StyledInputContainer>
+}
+
+TextInput.defaultProps = {
+  // tslint:disable-next-line:no-empty
+  onBlur: () => {},
 }
 
 export default TextInput;
