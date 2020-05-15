@@ -14,7 +14,6 @@ export interface InputProps extends React.ComponentProps<any> {
   options?: any;
   value?:string;
   className?: string;
-  accept?: string;
 }
 
 const Error = styled.span`
@@ -98,7 +97,6 @@ export const TextInput: React.FunctionComponent<InputProps & {className?: string
           onChange={props.onChange}
           value={props.value}
           type={props.type || 'text'}
-          accept={props.accept}
         />
       )}
 

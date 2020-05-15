@@ -14,6 +14,7 @@ export interface FilesUploaderProps extends React.ComponentProps<any> {
   maxFiles?: number;
   multiple?: boolean;
   uploadRecommandations?: string;
+  setCover: (cover: any) => void;
 }
 
 const InfosContainer = styled.div`
@@ -53,6 +54,7 @@ const StyledContainer = styled.div`
 
   .dzu {
     &-dropzone {
+      overflow: hidden;
       border: none;
       z-index: 1;
       align-items: center;
@@ -157,7 +159,6 @@ const StyledContainer = styled.div`
       }
 
       &Button {
-        background-image: url('assets/icons/icon--close.svg') !important;
         margin: 0 auto;
       }
 
@@ -291,6 +292,11 @@ export const FilesUploader: React.FunctionComponent<FilesUploaderProps> = (props
   // todo: manage error here 👇
   const handleChangeStatus: IDropzoneProps['onChangeStatus'] = ({ meta }, status) => {
     console.log(status, meta)
+    if (status === 'done') {
+      props.setCover(
+        { name: meta.name, size: meta.size, previewUrl: meta.previewUrl, wifht: meta.width, height: meta.height }
+      );
+    }
   }
 
   return <div>
