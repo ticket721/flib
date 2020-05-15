@@ -1,17 +1,18 @@
 import * as React      from 'react';
-import { ChangeEvent } from 'react';
 import styled          from '../../../config/styled';
+import { ChangeEvent } from 'react';
 
 export interface TextareaProps extends React.ComponentProps<any> {
-  error?:boolean | undefined;
-  errormessage?:string;
+  error?:string;
   label:string;
   maxChar?: number;
   name:string;
-  onChange: (eventOrPath: string | ChangeEvent<any>) => void | ((eventOrTextValue: string | ChangeEvent<any>) => void);
   placeholder: string;
   value?:string;
   className?: string;
+  onChange: (eventOrPath: string | ChangeEvent<any>) => void | ((eventOrTextValue: string | ChangeEvent<any>) => void);
+  onFocus?: (eventOrPath: string | ChangeEvent<any>) => void | ((eventOrTextValue: string | ChangeEvent<any>) => void);
+  onBlur?: (eventOrPath: string | ChangeEvent<any>) => void | ((eventOrTextValue: string | ChangeEvent<any>) => void);
 }
 
 const Error = styled.span`
@@ -19,7 +20,7 @@ const Error = styled.span`
   color: ${props => props.theme.warningColor};
   font-size: 13px;
   font-weight: 500;
-  left: 0;
+  left: 10px;
   position: absolute;
 `;
 
@@ -45,12 +46,17 @@ const StyledLabel = styled.label`
 `;
 
 const StyledTextarea = styled.div<TextareaProps>`
+  position: relative;
   background-color: ${props => props.theme.componentColor};
   border-radius: ${props => props.theme.defaultRadius};
   display: flex;
   flex-direction: column;
   padding-top: ${props => props.theme.biggerSpacing};
   transition: background-color 300ms ease;
+
+  textarea {
+    resize: vertical;
+  }
 
   ${props => props.error &&`
     ${StyledLabel}{
@@ -108,18 +114,20 @@ export const Textarea: React.FunctionComponent<TextareaProps> = (props: Textarea
       </LabelsContainer>
 
       <textarea
-        id={props.name}
-        name={props.name}
-        placeholder={props.placeholder}
-        defaultValue={props.value}
-        onKeyUp={keypress}
-        maxLength={props.maxChar}
-        onChange={props.onChange}
+      id={props.name}
+      name={props.name}
+      placeholder={props.placeholder}
+      value={props.value}
+      onChange={props.onChange}
+      onFocus={props.onFocus}
+      onBlur={props.onBlur}
+      onKeyUp={keypress}
+      maxLength={props.maxChar}
       >
       </textarea>
 
-    {props.error && <Error>{ props.errormessage}</Error> }
+    {props.error && <Error>{ props.error}</Error> }
   </StyledTextarea>
-}
+};
 
 export default Textarea;

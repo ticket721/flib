@@ -5,11 +5,12 @@ import styled          from '../../../config/styled';
 import { ChangeEvent } from 'react';
 
 export interface InputProps extends React.ComponentProps<any> {
-  error?:boolean | undefined;
-  errormessage?:string;
+  error?:string;
   label:string;
   name:string;
-  onChange?: (eventOrPath: string | ChangeEvent<any>) => void | ((eventOrTextValue: string | ChangeEvent<any>) => void);
+  onChange: (eventOrPath: string | ChangeEvent<any>) => void | ((eventOrTextValue: string | ChangeEvent<any>) => void);
+  onFocus?: (eventOrPath: string | ChangeEvent<any>) => void | ((eventOrTextValue: string | ChangeEvent<any>) => void);
+  onBlur?: (eventOrPath: string | ChangeEvent<any>) => void | ((eventOrTextValue: string | ChangeEvent<any>) => void);
   placeholder: string;
   options?: any;
   value?:string;
@@ -21,8 +22,8 @@ const Error = styled.span`
   color: ${props => props.theme.warningColor};
   font-size: 13px;
   font-weight: 500;
-  left: 0;
-  position: relative;
+  left: 10px;
+  position: absolute;
 `;
 
 const StyledLabel = styled.label`
@@ -46,6 +47,7 @@ const StyledLabel = styled.label`
 `;
 
 const StyledInputContainer = styled.div<InputProps>`
+  position: relative;
   background-color: ${props => props.theme.componentColor};
   border-radius: ${props => props.theme.defaultRadius};
   display: flex;
@@ -88,25 +90,36 @@ export const TextInput: React.FunctionComponent<InputProps & {className?: string
       <StyledLabel htmlFor={props.name}>{props.label}</StyledLabel>
 
       {props.options ? (
-        <Cleave options={props.options} id={props.name} name={props.name} placeholder={props.placeholder} defaultValue={props.value} onChange={props.onChange} />
+        <Cleave
+        options={props.options}
+        id={props.name}
+        name={props.name}
+        placeholder={props.placeholder}
+        defaultValue={props.value}
+        onChange={props.onChange}
+        onFocus={props.onFocus}
+        onBlur={props.onBlur}
+        />
       ) : (
         <input
-          id={props.name}
-          name={props.name}
-          placeholder={props.placeholder}
-          onChange={props.onChange}
-          value={props.value}
-          type={props.type || 'text'}
+        id={props.name}
+        name={props.name}
+        placeholder={props.placeholder}
+        onFocus={props.onFocus}
+        value={props.value}
+        type={props.type || 'text'}
+        onChange={props.onChange}
+        onBlur={props.onBlur}
         />
       )}
 
-      {props.error && <Error>{props.errormessage}</Error> }
+      {props.error && <Error>{props.error}</Error> }
   </StyledInputContainer>
-}
+};
 
 TextInput.defaultProps = {
   // tslint:disable-next-line:no-empty
   onBlur: () => {},
-}
+};
 
 export default TextInput;
