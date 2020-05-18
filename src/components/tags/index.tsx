@@ -156,23 +156,6 @@ const StyledLabel = styled.label`
   }
 `;
 
-const Counter = styled.span`
-  color: ${props => props.theme.textColorDarker};
-  font-size: 11px;
-  font-weight: 700;
-  position: absolute;
-  right: ${props => props.theme.biggerSpacing};
-`;
-
-const Error = styled.span`
-  bottom: -16px;
-  color: ${props => props.theme.warningColor};
-  font-size: 13px;
-  font-weight: 500;
-  left: 0;
-  position: relative;
-`;
-
 const StyledInputContainer = styled.div<TagsProps>`
   position: relative;
   background-color: ${props => props.theme.componentColor};
@@ -261,12 +244,6 @@ export const Tags: React.FunctionComponent<TagsProps> = (props: TagsProps): JSX.
       </TagsContainer>
       {props.error && <Error>{props.errormessage}</Error> }
   </StyledInputContainer>
-};
-
-Tags.defaultProps = {
-  onKeyDown: (key, value) => {},
-  onChange: (value) => {},
-  onInputChange: (value) => {}
 };
 
 export default Tags;
