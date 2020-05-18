@@ -117,9 +117,4 @@ export const TextInput: React.FunctionComponent<InputProps & {className?: string
   </StyledInputContainer>
 };
 
-TextInput.defaultProps = {
-  // tslint:disable-next-line:no-empty
-  onBlur: () => {},
-};
-
 export default TextInput;
