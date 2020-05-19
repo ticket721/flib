@@ -1,10 +1,10 @@
 import * as React from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import styled from '../../config/styled';
-import "react-datepicker/dist/react-datepicker.css";
-import fr from "date-fns/locale/fr";
-import es from "date-fns/locale/es";
-import it from "date-fns/locale/it";
+import 'react-datepicker/dist/react-datepicker.css';
+import fr from 'date-fns/locale/fr';
+import es from 'date-fns/locale/es';
+import it from 'date-fns/locale/it';
 
 registerLocale('es', es);
 registerLocale('fr', fr);

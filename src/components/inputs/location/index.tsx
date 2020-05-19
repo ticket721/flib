@@ -107,7 +107,7 @@ export interface LocationProps extends React.ComponentProps<any> {
   value?:string;
   name:string;
   onChange: (e: any) => void;
-  className: string;
+  className?: string;
 }
 
 const StyledLabel = styled.label`

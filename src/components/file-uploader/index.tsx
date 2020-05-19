@@ -253,7 +253,7 @@ export const FilesUploader: React.FunctionComponent<FilesUploaderProps> = (props
       <StyledContainer>
         <div {...dropzoneProps}>
         <InfosContainer>
-          <UploadIcon icon={props.multiple ? 'gallery' : 'upload'} size='62px' color={!props.hasErrors ? 'rgba(255, 255, 255, 0.38)' : '#C91D31' } />
+          <UploadIcon icon='upload-img' size='62px' color={!props.hasErrors ? 'rgba(255, 255, 255, 0.38)' : '#C91D31' } />
           <span>{props.dragDropLabel}</span>
           <span>{props.browseLabel}</span>
         </InfosContainer>
