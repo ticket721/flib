@@ -86,7 +86,8 @@ const customStyles = {
     alignItems: 'center',
     display: 'flex',
     flex: 1,
-    padding: 0
+    padding: 0,
+    flexWrap: 'wrap' as 'wrap'
   }),
   singleValue: () => ({
     fontSize: 14,
@@ -98,13 +99,13 @@ const customStyles = {
 
 export interface SelectProps extends React.ComponentProps<any> {
   defaultValue?:object;
-  error?:boolean;
-  errorMessage?:string;
+  error?: string | undefined;
   label?:string;
   options: Array<object>,
   placeholder?: string;
   searchable?:boolean;
-  value?:string;
+  multiple?:boolean;
+  value?:Array<object>;
 }
 
 const StyledLabel = styled.label`
@@ -125,6 +126,15 @@ const StyledLabel = styled.label`
     transition: opacity 300ms ease;
     width: 4px;
   }
+`;
+
+const Error = styled.span`
+  top: 110%;
+  color: ${props => props.theme.errorColor.hex};
+  font-size: 13px;
+  font-weight: 500;
+  left: 10px;
+  position: absolute;
 `;
 
 const StyledInputContainer = styled.div<SelectProps>`
@@ -162,13 +172,17 @@ export const SelectInput: React.FunctionComponent<SelectProps> = (props: SelectP
               <StyledLabel>{props.label}</StyledLabel>
             }
             <Select
+              isMulti={props.multiple}
+              value={props.value}
               defaultValue={props.defaultValue}
               noOptionsMessage={() => "No values available"}
               options={props.options}
               placeholder={props.placeholder}
               isSearchable={props.searchable}
               styles={customStyles}
+              onChange={props.onChange}
             />
+          { props.error && <Error>{props.error}</Error>}
           </StyledInputContainer>
 
 }
